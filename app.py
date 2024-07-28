@@ -18,6 +18,17 @@ import xgboost as xgb
 from sklearn.impute import SimpleImputer
 from catboost import CatBoostRegressor
 import lightgbm as lgb
+import base64
+
+st.set_page_config(
+    page_title="ForestWatch",
+    page_icon=":computer:",
+    menu_items={
+        'Get Help': 'https://www.linkedin.com/in/arpitsinghgautam/',
+        'Report a bug': "https://github.com/arpitsinghgautam/ForestWatch/issues",
+        'About': " An AI-powered platform for real-time deforestation and forest fire detection, with comprehensive historical analysis for sustainable forest management."
+    }
+)
 
 # Load models
 # deforestation_model = load_model('deforestation_model.h5')
@@ -35,6 +46,23 @@ def load_models():
 
 wildfire_model, deforestation_model = load_models()
 
+
+image_file = 'assets/sidebar.jpg'
+with open(image_file, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+st.markdown(
+            f"""
+            <style>
+            .css-6qob1r {{
+                background-image: url(data:image/{"png"};base64,{encoded_string.decode()});
+                background-size: cover;
+                colour:
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
 # Sidebar
 st.sidebar.image('assets/logo1.png', use_column_width=True)
 page = st.sidebar.selectbox("Choose a page", ["Why save forests?", "Wildfire Detection", "Deforestation Detection", "Deforestation Analysis"])
@@ -42,16 +70,61 @@ page = st.sidebar.selectbox("Choose a page", ["Why save forests?", "Wildfire Det
 
 # Page 1: Why save forests?
 if page == "Why save forests?":
+    
+    mainpage_image_file = 'assets/forest-mainpage.jpg'
+    with open(mainpage_image_file, "rb") as mainpage_image_file:
+        mainpage_encoded_string = base64.b64encode(mainpage_image_file.read())
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url(data:image/{"png"};base64,{mainpage_encoded_string.decode()});
+            background-size: cover
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+        )
     st.title("The Importance of Forests and the Impact of Deforestation and Wildfires")
     st.write("""
-        Forests are vital to the health of our planet. They cover about 31% of the land area on our planet and provide a habitat for over 80% of terrestrial species of animals, plants, and fungi.
-        However, deforestation and wildfires pose significant threats to these ecosystems:
-        - **Deforestation:** Contributes to 15% of global greenhouse gas emissions and leads to the loss of biodiversity and disruption of water cycles.
-        - **Wildfires:** Destroy approximately 4 million hectares of forest every year, releasing large amounts of carbon dioxide and other pollutants into the atmosphere.
+             
+             Forests are vital to our planet's health, acting as the lungs of the Earth by absorbing carbon dioxide and releasing oxygen. They regulate the global climate, preserve biodiversity, and provide essential resources. However, deforestation and wildfires severely threaten these ecosystems, impacting the environment, economy, and human health.
+""")
+    st.subheader("The Impact of Deforestation")
+    st.write("""
+Deforestation is the large-scale removal of forests, often for agriculture, urban development, and logging. It leads to the loss of around 10 million hectares of forest each year, significantly affecting global climate and biodiversity:
+
+**Climate Change:** Forests absorb carbon dioxide, and their removal releases stored carbon, contributing to 15% of global greenhouse gas emissions. \n
+**Biodiversity Loss:** Forests house 80% of the world's terrestrial biodiversity. Deforestation destroys habitats, pushing species toward extinction.\n
+**Soil Erosion:** Trees maintain soil structure and prevent erosion. Deforestation leads to severe erosion, loss of fertile land, and increased landslide risk.\n
+**Water Cycle Disruption:** Forests influence precipitation and water quality. Deforestation changes rainfall patterns, reduces water availability, and increases flood and drought risks. \n
+## The Devastating Effects of Wildfires
+Wildfires are uncontrolled fires that spread through vegetation and forests, becoming more frequent due to climate change and human activities:
+
+**Air Quality and Human Health:** Wildfires produce smoke and particulate matter, degrading air quality and causing respiratory and cardiovascular issues. In 2020, California wildfires affected over 10 million people. \n
+**Carbon Emissions:** Wildfires release significant carbon dioxide. In 2020, California wildfires emitted over 100 million metric tons of CO2.\n
+**Biodiversity and Habitat Loss:** Wildfires destroy habitats, threatening species survival and affecting soil health and water quality.\n
+**Economic Impact:** Wildfires cause massive economic losses, including property damage and increased firefighting costs. The 2018 California wildfires resulted in over $24 billion in losses.\n
+## The Urgent Need for Action
+Addressing deforestation and wildfires is crucial for sustainability. Early detection and monitoring are essential to mitigate these threats. ForestGuardian leverages AI and satellite imagery to detect and analyze deforestation and wildfires in real-time. This tool aims to empower policymakers, environmental organizations, and communities with actionable insights to combat these issues effectively, ensuring a healthier, more sustainable future for our planet.
     """)
 
 # Page 2: Wildfire Detection
 elif page == "Wildfire Detection":
+    mainpage_image_file = 'assets/forest_fire_bg.jpg'
+    with open(mainpage_image_file, "rb") as mainpage_image_file:
+        mainpage_encoded_string = base64.b64encode(mainpage_image_file.read())
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url(data:image/{"png"};base64,{mainpage_encoded_string.decode()});
+            background-size: cover
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+        )
     st.title("Detecting Wildfires Using Satellite Imagery")
     st.write("""
         Wildfires cause immense damage to forests and ecosystems each day. Rapid detection is crucial to mitigating this damage.
@@ -87,6 +160,20 @@ elif page == "Wildfire Detection":
 
 # Page 3: Deforestation Detection
 elif page == "Deforestation Detection":
+    mainpage_image_file = 'assets/deforestation__bg.jpg'
+    with open(mainpage_image_file, "rb") as mainpage_image_file:
+        mainpage_encoded_string = base64.b64encode(mainpage_image_file.read())
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url(data:image/{"png"};base64,{mainpage_encoded_string.decode()});
+            background-size: cover
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+        )
     st.title("Detecting Deforestation Using Satellite Imagery")
     st.write("""
         Deforestation causes extensive damage to our environment. Early detection helps in taking prompt actions to prevent further damage.
@@ -113,9 +200,23 @@ elif page == "Deforestation Detection":
 
 # Page 4: Deforestation Analysis
 elif page == "Deforestation Analysis":
+    mainpage_image_file = 'assets/deforestation_bg2.jpg'
+    with open(mainpage_image_file, "rb") as mainpage_image_file:
+        mainpage_encoded_string = base64.b64encode(mainpage_image_file.read())
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url(data:image/{"png"};base64,{mainpage_encoded_string.decode()});
+            background-size: cover
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+        )
     st.title("Exploratory Data Analysis on Deforestation Dataset")
     # Load the dataset
-    data = pd.read_csv('DeforestationSDG datassset/goal15.forest_shares.csv')
+    data = pd.read_csv('DeforestationSDG-dataset/goal15.forest_shares.csv')
     st.write(data.head())
     # st.write(data.info())
     
